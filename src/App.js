@@ -1,29 +1,29 @@
-import logo from './logo.svg';
+
 import './App.css';
 import moment from 'moment';
+import {Header} from "./components/Header";
+import {Monitor} from "./components/Monitor";
+import {Calendar} from "./components/Calendar";
+import {useState} from "react";
 
 
 
 function App() {
 
-  moment.updateLocale('en', { week : {dow : 1}})
-
-  const startDay = moment().startOf('month').startOf('week');
-  const endDay = moment().endOf('month').endOf('week');
-
-  const day = startDay.clone()
-
-  const calendar = []
-  while (!day.isAfter(endDay)){
-    calendar.push(day.clone())
-    day.add(1,'day')
-  }
-  console.log(calendar)
-
+    moment.updateLocale('en', { week : {dow : 1}})
+    const [today,setToday] = useState(moment())
+    const startDay = today.clone().startOf('month').startOf('week');
+    const prevHandler = () => setToday( prev => prev.clone().subtract(1,'month'))
+    const todayHandler = () => setToday(moment())
+    const nextHandler = () => setToday( prev => prev.clone().add(1,'month'))
 
 
   return (
-    <div></div>
+    <section className="calendar">
+      <Header/>
+      <Monitor today = {today} prevHandler = {prevHandler} todayHandler={todayHandler} nextHandler ={nextHandler} />
+      <Calendar startDay = {startDay} currTime = {today}/>
+    </section>
   );
 }
 
