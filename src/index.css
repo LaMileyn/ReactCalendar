@@ -2,12 +2,14 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  outline: none;
 }
 #root{
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 html{
   font-family: sans-serif;
